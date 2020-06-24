@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidMediaPlayer</string>
+    <string name="audio">Audio</string>
+    <string name="video">Video</string>
 </resources>
