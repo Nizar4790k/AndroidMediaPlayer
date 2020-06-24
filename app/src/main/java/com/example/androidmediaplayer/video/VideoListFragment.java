@@ -2,10 +2,8 @@ package com.example.androidmediaplayer.video;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaMetadata;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -25,7 +23,6 @@ import com.example.androidmediaplayer.FileHelper;
 import com.example.androidmediaplayer.R;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VideoListFragment extends Fragment {
@@ -41,7 +38,7 @@ public class VideoListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.video_fragment,container,false);
+        View view = inflater.inflate(R.layout.video_list_fragment,container,false);
 
         mRecyclerView = view.findViewById(R.id.recycler_view);
 
@@ -96,7 +93,7 @@ public class VideoListFragment extends Fragment {
         private TextView mTextViewName;
         private TextView mTextViewDuration;
         private ImageView mImageViewThumbnail;
-        private File video;
+        private File mVideo;
 
 
         public VideoHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -111,7 +108,7 @@ public class VideoListFragment extends Fragment {
 
 
         public void bind(File video){
-            video = video;
+            mVideo = video;
             this.mTextViewName.setText(video.getName());
 
 
@@ -132,7 +129,8 @@ public class VideoListFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
-
+            Intent intent = VideoFragment.newIntent(mVideo,getContext());
+            startActivity(intent);
 
         }
     }
