@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidmediaplayer.FileHelper;
 import com.example.androidmediaplayer.R;
+import com.example.androidmediaplayer.SimpleItemDecorator;
 
 import java.io.File;
 import java.util.List;
@@ -45,6 +48,8 @@ public class VideoListFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recycler_view);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new SimpleItemDecorator(15));
+
 
         List<File> musicList = FileHelper.getListFiles(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Videos"),".mp4");
 
@@ -111,7 +116,12 @@ public class VideoListFragment extends Fragment {
 
         public void bind(File video){
             mVideo = video;
-            this.mTextViewName.setText(video.getName());
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                this.mTextViewName.setText(Html.fromHtml("<strong>"+video.getName()+"</strong>",0));
+            }else{
+                this.mTextViewName.setText(Html.fromHtml("<strong>"+video.getName()+"</strong>"));
+            }
 
 
             Bitmap bMap = ThumbnailUtils.createVideoThumbnail(video.getAbsolutePath(),

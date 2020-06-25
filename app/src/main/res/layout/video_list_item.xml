@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="beforeDescendants"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:background="@drawable/card_background_selector"
+    >
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,6 +24,7 @@
         android:id="@+id/image_view_thumbail"
         android:layout_width="77dp"
         android:layout_height="74dp"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
@@ -49,3 +63,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
+
+
+
+    </FrameLayout>

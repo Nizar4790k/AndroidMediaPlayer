@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,9 +111,11 @@ public class AudioListFragment extends Fragment {
 
         public void bind(File audio){
             mAudio = audio;
-            this.mTextViewName.setText(audio.getName());
-
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                this.mTextViewName.setText(Html.fromHtml("<strong>"+audio.getName()+"</strong>",0));
+            }else{
+                this.mTextViewName.setText(Html.fromHtml("<strong>"+audio.getName()+"</strong>"));
+            }
 
 
             MediaMetadataRetriever m = new MediaMetadataRetriever();
