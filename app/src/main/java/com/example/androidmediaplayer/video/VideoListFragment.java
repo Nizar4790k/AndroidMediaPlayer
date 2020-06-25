@@ -25,6 +25,8 @@ import com.example.androidmediaplayer.R;
 import java.io.File;
 import java.util.List;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 public class VideoListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -120,9 +122,11 @@ public class VideoListFragment extends Fragment {
             mImageViewThumbnail.setImageBitmap(bMap);
             m.setDataSource(video.getPath());
 
-            String  duration = m.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            long duration = Long.parseLong(m.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            duration = duration / Long.parseLong("1000");
 
-            this.mTextViewDuration.setText(duration);
+
+            this.mTextViewDuration.setText(convertSecondsToHMmSs(duration));
 
         }
 
@@ -132,6 +136,13 @@ public class VideoListFragment extends Fragment {
             Intent intent = VideoFragment.newIntent(mVideo,getContext());
             startActivity(intent);
 
+        }
+
+        private  String convertSecondsToHMmSs(long seconds) {
+            long s = seconds % 60;
+            long m = (seconds / 60) % 60;
+            long h = (seconds / (60 * 60)) % 24;
+            return String.format("%d:%02d:%02d", h,m,s);
         }
     }
 

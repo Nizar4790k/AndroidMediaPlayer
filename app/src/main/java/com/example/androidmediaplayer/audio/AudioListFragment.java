@@ -119,10 +119,19 @@ public class AudioListFragment extends Fragment {
             mImageViewAudioIcon.setImageResource(R.drawable.ic_audio);
             m.setDataSource(audio.getPath());
 
-            String  duration = m.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            long duration = Long.parseLong(m.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            duration = duration / Long.parseLong("1000");
 
-            this.mTextViewDuration.setText(duration);
 
+            this.mTextViewDuration.setText(convertSecondsToHMmSs(duration));
+        }
+
+
+        private  String convertSecondsToHMmSs(long seconds) {
+            long s = seconds % 60;
+            long m = (seconds / 60) % 60;
+            long h = (seconds / (60 * 60)) % 24;
+            return String.format("%d:%02d:%02d", h,m,s);
         }
 
         @Override

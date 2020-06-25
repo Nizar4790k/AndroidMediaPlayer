@@ -9,4 +9,7 @@ public class VideoActivity extends SingleFragmentActivity {
     public Fragment createFragment() {
         return new VideoFragment();
     }
+
+
+
 }

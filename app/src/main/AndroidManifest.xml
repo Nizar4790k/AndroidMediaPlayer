@@ -20,11 +20,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".video.VideoActivity">
+        <activity android:name=".video.VideoActivity"
+                android:parentActivityName=".MainActivity"
+            >
 
         </activity>
 
-        <activity android:name=".audio.AudioActivity">
+        <activity
+            android:name=".audio.AudioActivity"
+            android:parentActivityName=".MainActivity"
+            >
 
         </activity>
 
