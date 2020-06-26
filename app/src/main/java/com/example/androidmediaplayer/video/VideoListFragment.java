@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +50,7 @@ public class VideoListFragment extends Fragment {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.addItemDecoration(new SimpleItemDecorator(15));
+
 
 
         List<File> musicList = FileHelper.getListFiles(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Videos"),".mp4");
@@ -152,7 +154,14 @@ public class VideoListFragment extends Fragment {
             long s = seconds % 60;
             long m = (seconds / 60) % 60;
             long h = (seconds / (60 * 60)) % 24;
-            return String.format("%d:%02d:%02d", h,m,s);
+
+            if(h==0){
+                 return String.format("%02d:%02d",m,s);
+            }else{
+                return String.format("%d:%02d:%02d", h,m,s);
+            }
+
+
         }
     }
 

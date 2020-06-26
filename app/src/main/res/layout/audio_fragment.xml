@@ -9,6 +9,8 @@
     >
 
 
+
+
     <LinearLayout
         android:id="@+id/main_audio_view"
         android:layout_width="fill_parent"

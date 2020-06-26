@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidmediaplayer.FileHelper;
 import com.example.androidmediaplayer.R;
+import com.example.androidmediaplayer.SimpleItemDecorator;
 
 import java.io.File;
 import java.util.List;
@@ -45,6 +46,7 @@ public class AudioListFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recycler_view);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(new SimpleItemDecorator(15));
 
         List<File> audioList = FileHelper.getListFiles(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Audio"),".mp3");
 
@@ -120,7 +122,7 @@ public class AudioListFragment extends Fragment {
 
             MediaMetadataRetriever m = new MediaMetadataRetriever();
 
-            mImageViewAudioIcon.setImageResource(R.drawable.ic_audio);
+            mImageViewAudioIcon.setImageResource(R.drawable.audio);
             m.setDataSource(audio.getPath());
 
             long duration = Long.parseLong(m.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
@@ -135,7 +137,14 @@ public class AudioListFragment extends Fragment {
             long s = seconds % 60;
             long m = (seconds / 60) % 60;
             long h = (seconds / (60 * 60)) % 24;
-            return String.format("%d:%02d:%02d", h,m,s);
+
+            if(h==0){
+                return String.format("%02d:%02d",m,s);
+            }else{
+                return String.format("%d:%02d:%02d", h,m,s);
+            }
+
+
         }
 
         @Override
